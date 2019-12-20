@@ -4,10 +4,10 @@ path = os.getcwd()
 
 global nim,nama,jurusan,kelas
 
-nim = [1904618,1908653,1904619]
-nama = ["Muhammad Izzatul Haq","Muhamad Fadeelah Rizki","Tatsuya, Hajime"]
-jurusan = ["Ilmu Komputer","Ilmu Komputer","Ilmu Komputer"]
-kelas = ["C2","C2","C2"]
+nim = [1904618,1908653,1904619,1907723]
+nama = ["Muhammad Izzatul Haq","Muhamad Fadeelah Rizki","Tatsuya, Hajime","George Washington"]
+jurusan = ["Ilmu Komputer","Ilmu Komputer","Ilmu Komputer","Ilmu komputer"]
+kelas = ["C2","C2","C2","C2"]
 ip = [4,4,3.8]
 
 def lihat_data():
