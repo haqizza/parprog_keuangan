@@ -4,8 +4,8 @@ path = os.getcwd()
 
 global nim,nama,jurusan,kelas
 
-nim = [1904618,1908653,1904619]
-nama = ["Muhammad Izzatul Haq","Muhamad Fadeelah Rizki","Tatsuya, Hajime"]
+pemasukan = []
+pengeluaran = []
 jurusan = ["Ilmu Komputer","Ilmu Komputer","Ilmu Komputer"]
 kelas = ["C2","C2","C2"]
 ip = [4,4,3.8]
