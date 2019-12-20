@@ -3,9 +3,6 @@ import json
 
 path = os.getcwd()
 
-with open('data.txt', 'rt') as json_file:
-   data = json.load(json_file)
-
 import json
 
 data = {}
