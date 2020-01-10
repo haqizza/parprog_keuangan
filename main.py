@@ -1,175 +1,75 @@
 import os
+import json
+import time
+from datetime import datetime
 
+# Set now as Today Date
+now = datetime.today().strftime('%d-%m-%Y')
+# Set Path
 path = os.getcwd()
 
-import json
 
-data = {}
-data['pengeluaran'] = []
-data['pengeluaran'].append({
-    'nama': 'Pembelian Scott',
-    'jumlah': '10000'
-})
-data['pengeluaran'].append({
-    'nama': 'Pembelian Rumah',
-    'jumlah': '1000000000'
-})
-data2 = {}
-data2['pemasukan'] = []
-data2['pemasukan'].append({
-    'nama': 'Hadiah Scott',
-    'jumlah': '10000'
-})
-data2['pemasukan'].append({
-    'nama': 'Hibah',
-    'jumlah': '1000000'
-})
+with open(path+'\deposit.json') as deposit_file:
+   dataDeposit = json.load(deposit_file)
+with open(path+'\pemasukan.json') as pemasukan_file:
+   dataPemasukan = json.load(pemasukan_file)
+with open(path+'\pengeluaran.json') as pengeluaran_file:
+   dataPengeluaran = json.load(pengeluaran_file)
+with open(path+'\\riwayat.json') as riwayat_file:
+   dataRiwayat = json.load(riwayat_file)
 
-with open(path,'\data.txt', 'w') as outfile:
-    json.dump(data,outfile)
-
-with open('d:/GitHub/Parprog/12-12/data.txt', 'a') as outfile: #Just Add
-    json.dump(data2,outfile)
-
-with open('data.txt', 'rt') as json_file:
-   datas = json.load(json_file)
-
-print(data2["pemasukan"])
-print(data["pengeluaran"])
-global nim,nama,jurusan,kelas
-
-pemasukan = []
-pengeluaran = []
-jurusan = ["Ilmu Komputer","Ilmu Komputer","Ilmu Komputer"]
-kelas = ["C2","C2","C2"]
-nim = [1904618,1908653,1904619,1907723]
-nama = ["Muhammad Izzatul Haq","Muhamad Fadeelah Rizki","Tatsuya, Hajime","George Washington"]
-jurusan = ["Ilmu Komputer","Ilmu Komputer","Ilmu Komputer","Ilmu komputer"]
-kelas = ["C2","C2","C2","C2"]
-ip = [4,4,3.8]
-
-def lihat_data():
-    print("***********************")
-    print("   [Data Mahasiswa]")
-    for x in range(0,len(nama)):
-        print("NIM : {}\nNama : {}\nJurusan: {}\nKelas : {}\nIP : {}".format(nim[x],nama[x],jurusan[x],kelas[x],ip[x]))
-        print("---------------")    
-    print("***********************")
-
-def cari_data():
-    print("***********************")
-    print(" [Cari Data Mahasiswa]")
-    print("1. NIM\n2. Nama\n3. Jurusan\n4. Kelas")
-    acc = int(input("Cari menurut : "))
-    if acc == 1:
-        src = int(input("Masukkan NIM : "))
-        print("---------------")
-        for x in range(0,len(nama)):
-            if src == nim[x]:
-                print("NIM : {}\nNama : {}\nJurusan: {}\nKelas : {}\nIP : {}".format(nim[x],nama[x],jurusan[x],kelas[x],ip[x]))
-                print("---------------")
-    elif acc == 2:
-        src = input("Masukkan Nama : ")
-        for x in range(0,len(nama)):
-            if src == nama[x]:
-                print("NIM : {}\nNama : {}\nJurusan: {}\nKelas : {}\nIP : {}".format(nim[x],nama[x],jurusan[x],kelas[x],ip[x]))
-                print("---------------")
-    elif acc == 3:
-        src = input("Masukkan Jurusan : ")
-        for x in range(0,len(nama)):
-            if src == jurusan[x]:
-                print("NIM : {}\nNama : {}\nJurusan: {}\nKelas : {}\nIP : {}".format(nim[x],nama[x],jurusan[x],kelas[x],ip[x]))
-                print("---------------")
-    elif acc == 4:
-        src = input("Masukkan Kelas : ")
-        for x in range(0,len(nama)):
-            if src == kelas[x]:
-                print("NIM : {}\nNama : {}\nJurusan: {}\nKelas : {}\nIP : {}".format(nim[x],nama[x],jurusan[x],kelas[x],ip[x]))
-                print("---------------")
-
-def tambah_data():
-    print("***********************")
-    print("[Tambah Data Mahasiswa]")
-    input_nim = int(input("NIM : "))
-    input_nama = input("Nama : ")
-    input_jurusan = input("Jurusan : ")
-    input_kelas = input("Kelas : ")
-    input_ip = input("IP : ")
-    nim.extend([input_nim])
-    nama.extend([input_nama])
-    jurusan.extend([input_jurusan])
-    kelas.extend([input_kelas])
-    ip.extend([input_ip])
-    print("DATA TELAH DITAMBAHKAN")
-    print("***********************")
-
-def hapus_data():
-    print("***********************")
-    print("[Hapus Data Mahasiswa]")
-    src = int(input("Masukkan NIM yang akan dihapus : "))
-    for x in range(0,len(nama)):
-        if src == nim[x]:
-            hapus = x
-    del nim[hapus]
-    del nama[hapus]
-    del jurusan[hapus]
-    del kelas[hapus]
-    del ip[hapus]
-    print("DATA TELAH DIHAPUS")
-    print("***********************")
-
-def ubah_data():
-    print("***********************")
-    print(" [Ubah Data Mahasiswa]")
-    src = int(input("Masukkan NIM Mahasiswa: "))
-    for x in range(0,len(nama)):
-        if src == nim[x]:
-            edit = x
-    input_nim = int(input("NIM : "))
-    input_nama = input("Nama : ")
-    input_jurusan = input("Jurusan : ")
-    input_kelas = input("Kelas : ")
-    input_ip = input("IP : ")
-    del nim[edit]
-    del nama[edit]
-    del jurusan[edit]
-    del kelas[edit]
-    del ip[edit]
-    nim.insert(edit,input_nim)
-    nama.insert(edit,input_nama)
-    jurusan.insert(edit,input_jurusan)
-    kelas.insert(edit, input_kelas)
-    ip.insert(edit, input_ip)
-    print("DATA TELAH DIUBAH")
-    print("***********************")
+simpanan = dataDeposit["simpanan"]
 
 
-def menu():
-    loop = True
-    while (loop):
-        print("     [ MENU ]")
-        print("==================")
-        print("1. Lihat Data")
-        print("2. Cari Data")
-        print("3. Tambah Data")
-        print("4. Ubah Data")
-        print("5. Hapus Data")
-        print("6. Keluar")
-        print("==================\n")
-        pilih = int(input("Masukkan Pilihan : "))
-        if(pilih == 1):
-            lihat_data()
-        elif(pilih == 2):
-            cari_data()
-        elif(pilih == 3):
-            tambah_data()
-        elif(pilih == 4):
-            ubah_data()
-        elif(pilih == 5):
-            hapus_data()
-        elif(pilih == 6):
-            exit()
+def gunakanSaldo(now,saldo):
+    tujuan = input("Tujuan: ")
+    jumlah = int(input("Jumlah: RP."))
+    tanggal = now
 
-menu()
+    if((saldo-jumlah) < 0):
+        print("[Saldo Tidak Mencukupi]")
+        time.sleep(1)
+        main()
+    else:
+        dataPengeluaran["pengeluaran"].append({
+            'tujuan': tujuan,
+            'jumlah': jumlah,
+            'tanggal': now
+        })
+        with open(path+'\pengeluaran.json', 'w') as outfile:
+            json.dump(dataPengeluaran,outfile)
+
+        saldo = saldo - jumlah
+        dataDeposit['saldo'] = saldo
+        with open(path+'\deposit.json', 'w') as outfile:
+            json.dump(dataDeposit,outfile)
+        
+        print("[Data Ditambahkan]")
+        time.sleep(1)
+        main()
+
+    
+def main():
+    saldo = dataDeposit["saldo"]
+    anggaran = dataDeposit["anggaran"]
+
+    print("===============================[ MENU ]===============================")
+    print("|1. Gunakan Saldo||2. Pengaturan||3. Keluar|")
+    print("======================================================================")
+    print("Saldo Anda: {}".format(saldo))
+    print("Anggaran Anda: {}".format(anggaran))
+    pilih = int(input("Menu: "))
+
+    if(pilih == 1):
+        gunakanSaldo(now,saldo)
+    elif(pilih == 2):
+        pengaturan()
+    elif(pilih == 3):
+        exit()
+    else:
+        print("Menu Tidak Tersedia")
+        main()
+
+main()
 
 
