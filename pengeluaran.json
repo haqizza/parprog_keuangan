@@ -1,4 +1,14 @@
 {
     "pengeluaran": [
+        {
+            "tujuan": "Makan",
+            "jumlah": 15000,
+            "tanggal": "10-01-2020"
+        },
+        {
+            "tujuan": "Transportasi",
+            "jumlah": 50000,
+            "tanggal": "10-01-2020"
+        }
     ]
 }

@@ -47,9 +47,25 @@ def setting():
     time.sleep(2) # Delay 2 sec
     main()
 
-def tambahSaldo(now,saldo):
+def historyWrite(jenis,asalTujuan,jumlah): # Untuk Menulis Riwayat
+    if(jenis=='Pemasukan'):
+        AorT='asalDana'
+    elif(jenis=='Pengeluaran'):
+        AorT='tujuan'
+
+    dataRiwayat["riwayat"].append({
+        'jenis': jenis,
+        AorT: asalTujuan,
+        'jumlah': jumlah,
+        'tanggal': now
+    })
+    with open(path+'\\riwayat.json', 'w') as outfile:
+        json.dump(dataRiwayat,outfile,indent=4)
+
+def tambahSaldo(saldo):
     clear()
     print("=====[ Tambah Saldo ]=====")
+    asalDana = input("Asal Dana: ")
     jumlah = int(input("Jumlah: RP."))
     saldo = saldo + jumlah
     
@@ -57,52 +73,74 @@ def tambahSaldo(now,saldo):
     with open(path+'\deposit.json', 'w') as outfile:
         json.dump(dataDeposit,outfile,indent=4)
     
+    historyWrite('Pemasukan',asalDana,jumlah)   
+
     print("[Saldo Ditambahkan]")
     time.sleep(1)
     main()
 
-def tambahSimpanan(now,simpanan):
+def tambahSimpanan(simpanan,saldo):
     clear()
     print("=====[ Tambah Simpanan ]=====")
-    jumlah = int(input("Jumlah: RP."))
-    simpanan = simpanan + jumlah
+    print("Simpanan Anda: {}".format(simpanan))
+    cek = input("Dari Saldo (Y/N)?")
     
+    if((cek=='n')or(cek=='N')):
+        asalDana = input("Asal Dana: ")
+    
+    jumlah = int(input("Jumlah: RP."))
+
+    if((cek=='y')or(cek=='Y')):
+        saldo = saldo - jumlah
+        dataDeposit['saldo'] = saldo
+
+    simpanan = simpanan + jumlah
     dataDeposit['simpanan'] = simpanan
     with open(path+'\deposit.json', 'w') as outfile:
         json.dump(dataDeposit,outfile,indent=4)
     
+    historyWrite('Pemasukan',asalDana,jumlah)   
+
     print("[Simpanan Ditambahkan]")
     time.sleep(2)
-    simpanan()
+    simpanans()
 
-def ambilSimpanan(now,simpanan):
+def ambilSimpanan(simpanan):
     clear()
     print("=====[ Ambil Simpanan ]=====")
+    print("Simpanan Anda: {}".format(simpanan))
     jumlah = int(input("Jumlah: RP."))
-    simpanan = simpanan - jumlah
     
+    if((simpanan - jumlah)<=0):
+        print("[Melebihi Simpanan]")
+    else:
+        simpanan = simpanan - jumlah
+        
     dataDeposit['simpanan'] = simpanan
     with open(path+'\deposit.json', 'w') as outfile:
         json.dump(dataDeposit,outfile,indent=4)
-    
-    print("[Simpanan Diambil]")
-    time.sleep(2)
-    simpanan()
 
-def simpanan(now,simpanan):
+    historyWrite('Pengeluaran','Ambil Simpanan',jumlah)   
+
+    print("[Simpanan Diambil]")
+    time.sleep(1)
+    simpanans()
+
+def simpanans():
     clear()
     simpanan = dataDeposit["simpanan"]
+    saldo = dataDeposit["saldo"]
     print("=============[ Simpanan ]==============")
     print("|1. Tambah  ||2. Ambil     |          |")
     print("|3. Kembali ||4. Menu Utama||5. Keluar|")
     print("=======================================")
     print("Simpanan Anda: {}".format(simpanan))
-    
     pilih = int(input("Menu: "))
+
     if(pilih == 1):
-        tambahSimpanan(now,simpanan)
+        tambahSimpanan(simpanan,saldo)
     elif(pilih == 2):
-        ambilSimpanan(now,simpanan)
+        ambilSimpanan(simpanan)
     elif(pilih == 3):
         pengaturan()
     elif(pilih == 4):
@@ -114,7 +152,7 @@ def simpanan(now,simpanan):
         time.sleep(2)
         pengaturan()
 
-def transaksi(now,saldo,anggaran):
+def transaksi(saldo,anggaran):
     clear()
     print("=====[ Transaksi ]=====")
     tujuan = input("Tujuan: ")
@@ -167,9 +205,9 @@ def pengaturan():
     pilih = int(input("Menu: "))
 
     if(pilih == 1):
-        simpanan(now)
+        simpanans()
     elif(pilih == 2):
-        aturAnggaran(now,anggaran)
+        aturAnggaran(anggaran)
     elif(pilih == 3):
         riwayat()
     elif(pilih == 4):
@@ -199,9 +237,9 @@ def main():
     pilih = int(input("Menu: "))
 
     if(pilih == 1):
-        transaksi(now,saldo,anggaran)
+        transaksi(saldo,anggaran)
     elif(pilih == 2):
-        tambahSaldo(now,saldo)
+        tambahSaldo(saldo)
     elif(pilih == 3):
         pengaturan()
     elif(pilih == 4):

@@ -1,4 +1,34 @@
 {
     "riwayat": [
+        {
+            "jenis": "Pengeluaran",
+            "tujuan": "Makan",
+            "jumlah": 15000,
+            "tanggal": "10-01-2020"
+        },
+        {
+            "jenis": "Pengeluaran",
+            "tujuan": "Transportasi",
+            "jumlah": 50000,
+            "tanggal": "10-01-2020"
+        },
+        {
+            "jenis": "Pengeluaran",
+            "tujuan": "Ambil Simpanan",
+            "jumlah": 10000,
+            "tanggal": "10-01-2020"
+        },
+        {
+            "jenis": "Pengeluaran",
+            "tujuan": "Ambil Simpanan",
+            "jumlah": 5000,
+            "tanggal": "10-01-2020"
+        },
+        {
+            "jenis": "Pengeluaran",
+            "tujuan": "Ambil Simpanan",
+            "jumlah": 1000,
+            "tanggal": "10-01-2020"
+        }
     ]
 }

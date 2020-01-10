@@ -20,3 +20,5 @@ __[Keterangan]__ Diganti dengan teks
 
 
 
+Last Move :
+1-10-2020 18.34 : historyWrite
