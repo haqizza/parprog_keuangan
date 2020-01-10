@@ -9,12 +9,14 @@
 
 #Command yg pasti dipakai
 
-1. git pull
+1. git pull __Untuk Update Data di Local__
+
+__Kalau selesai edit sesuatu, untuk kirim data ke origin(online)__
 2. git add .
-3. git commit -m "[Keterangan Perubahan]"
+3. git commit -m "[Keterangan]"
 4. git push origin master
 
-_[Keterangan Perubahan]_ Diganti dengan teks
+__[Keterangan]__ Diganti dengan teks
 
 
 
