@@ -1,1 +1,5 @@
-{"saldo": 78000, "anggaran": 0, "simpanan": 0}
+{
+    "saldo": 90000,
+    "anggaran": 50000,
+    "simpanan": 10000
+}
