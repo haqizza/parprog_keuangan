@@ -233,7 +233,6 @@ def laporan():
     elif(pilih != '0'):
         main()
 
-
 def transaksi(saldo,anggaran):
     clear()
     print("=======[ Transaksi ]=======")
