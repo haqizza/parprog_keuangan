@@ -21,4 +21,4 @@ __[Keterangan]__ Diganti dengan teks
 
 
 Last Move :
-1-10-2020 18.34 : historyWrite
+1-11-2020 23.18 : Make Laporan Bulanan Algorithm

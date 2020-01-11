@@ -2,13 +2,13 @@
     "pengeluaran": [
         {
             "tujuan": "Makan",
-            "jumlah": 15000,
-            "tanggal": "10-01-2020"
+            "jumlah": 20000,
+            "tanggal": "11-01-2020"
         },
         {
-            "tujuan": "Transportasi",
-            "jumlah": 50000,
-            "tanggal": "10-01-2020"
+            "tujuan": "Transport",
+            "jumlah": 10000,
+            "tanggal": "11-01-2020"
         }
     ]
 }

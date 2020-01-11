@@ -1,3 +1,6 @@
 {
-    "set": true
+    "set": true,
+    "anggaran_reset": true,
+    "anggaran_tanggal": 11,
+    "anggaran_jumlah": 100000
 }
