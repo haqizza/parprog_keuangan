@@ -1,12 +1,13 @@
 import os
 import json
 import time
+import re
 from datetime import datetime
 
 # Set dates
 now = datetime.today().strftime('%d-%m-%Y') # Assign (tanggal-bulan-tahun) hari ini ke now
 date = datetime.today().strftime('%d') # Assign tanggal ke date
-month = datetime.today().strftime('%B') # Assign nama bulan ke month
+month = datetime.today().strftime('%m') # Assign nama bulan ke month
 # Set Path
 path = os.getcwd()
 
@@ -26,6 +27,11 @@ with open(path+'\pengeluaran.json') as pengeluaran_file:
 #Fungsi untuk membersihkan jendela
 def clear():
     __ = os.system('cls')
+
+def countMonth():
+    for words in [month]:
+    if re.search(r'\b' + words + r'\b', s):
+        print('{0} found'.format(words))
 
 #Fungsi untuk pengaturan pertama kali
 def setting():
