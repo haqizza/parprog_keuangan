@@ -101,8 +101,14 @@ def tambahSaldo(saldo):
     with open(path+'\deposit.json', 'w') as outfile:
         json.dump(dataDeposit,outfile,indent=4)
     
+<<<<<<< HEAD
     dataPengeluaran["pengeluaran"].append({ # Tambah data
             'asalDana': jumlah,
+=======
+    dataPemasukan["pemasukan"].append({ # Tambah data
+            'asalDana': asalDana,
+            'jumlah': jumlah,
+>>>>>>> 526ad30386932394c74fc4b1b3c902822afcaf94
             'tanggal': now
         })
     with open(path+'\pemasukan.json','w') as outfile:
@@ -337,15 +343,14 @@ if(sett==True):
         config['anggaran_reset'] = True #Menandakan perlu direset nanti
         with open(path+'\config.json', 'w') as outfile:
             json.dump(config,outfile,indent=4)
-    else:
-        if((tgl==date)and(cek==True)):
-            dataDeposit['anggaran'] = config['anggaran_tanggal'] # Reset Anggaran bulanan
-            with open(path+'\deposit.json', 'w') as outfile:
-                json.dump(dataDeposit,outfile,indent=4)
-            
-            config['anggaran_reset'] = False #Menandakan sudah direset
-            with open(path+'\config.json', 'w') as outfile:
-                json.dump(config,outfile,indent=4)
+    elif((tgl==date)and(cek==True)):
+        dataDeposit['anggaran'] = config['anggaran_tanggal'] # Reset Anggaran bulanan
+        with open(path+'\deposit.json', 'w') as outfile:
+            json.dump(dataDeposit,outfile,indent=4)
+        
+        config['anggaran_reset'] = False #Menandakan sudah direset
+        with open(path+'\config.json', 'w') as outfile:
+            json.dump(config,outfile,indent=4)
     main()
 else:
     setting() #Akan melakukan setting pertama jika belum
