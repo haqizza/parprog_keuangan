@@ -84,6 +84,10 @@ def aturAnggaran(anggaran):
     config['anggaran_jumlah'] = anggaran
     with open(path+'\config.json', 'w') as outfile:
         json.dump(config,outfile,indent=4)
+
+    print("[Anggaran telah diubah]")
+    time.sleep(1)
+    main()
     
 def tambahSaldo(saldo):
     clear()
