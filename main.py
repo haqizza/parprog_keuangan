@@ -241,7 +241,7 @@ def laporan():
             lenPeng = lenPeng + 1
 
     print("=======[ Laporan ]=======")
-    print("[ Data Anda Bulan Ini ]".format(month))
+    print("[ Data Anda Bulan Ini ]")
     print("Pemasukan Anda           : {} Transaksi".format(lenPem))
     print("Pemasukan Anda Sebesar   : Rp.{}".format(jumlahPem))
     print("Pengeluaran Anda         : {} Transaksi".format(lenPeng))
@@ -258,7 +258,6 @@ def transaksi(saldo,anggaran):
     print("=======[ Transaksi ]=======")
     tujuan = input("Tujuan: ")
     jumlah = int(input("Jumlah: RP."))
-    tanggal = now
 
     if((saldo-jumlah) < 0):
         print("[Saldo Tidak Mencukupi]")
@@ -286,9 +285,7 @@ def transaksi(saldo,anggaran):
 
 def pengaturan():
     clear()
-    saldo = dataDeposit["saldo"]
     anggaran = dataDeposit["anggaran"]
-    simpanan = dataDeposit["simpanan"]
 
     print("========================[ MENU ]========================")
     print("|1. Simpanan||2. Atur Anggaran||3. Riwayat||4. Laporan|")
