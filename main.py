@@ -72,6 +72,13 @@ def aturAnggaran(anggaran):
     print("!! Anggaran Akan Dihitung Mulai Hari Ini !!")
     print("Anggaran Bulanan Anda: {}".format(anggaran))
     jumlah = int(input("Jumlah: RP."))
+    pilih = int(input("kembali(0): "))
+    if(pilih == 0):
+        pengaturan()
+    else:
+        print("[Menu Tidak Tersedia]")
+        time.sleep(1)
+        pengaturan()
     
     dataDeposit['anggaran'] = jumlah
     with open(path+'\deposit.json', 'w') as outfile:
@@ -95,7 +102,6 @@ def tambahSaldo(saldo):
         json.dump(dataDeposit,outfile,indent=4)
     
     dataPengeluaran["pengeluaran"].append({ # Tambah data
-            'tujuan': tujuan,
             'asalDana': jumlah,
             'tanggal': now
         })
