@@ -1,7 +1,6 @@
 import os
 import json
 import time
-import re
 from datetime import datetime
 
 # Set dates
@@ -58,6 +57,8 @@ def historyWrite(jenis,asalTujuan,jumlah): # Untuk Menulis Riwayat
     if(jenis=='Pemasukan'):
         AorT='asalDana'
     elif(jenis=='Pengeluaran'):
+        AorT='tujuan'
+    elif(jenis=='Simpanan'):
         AorT='tujuan'
 
     dataRiwayat["riwayat"].append({
@@ -136,7 +137,7 @@ def tambahSimpanan(simpanan,saldo):
     with open(path+'\deposit.json', 'w') as outfile:
         json.dump(dataDeposit,outfile,indent=4)
     
-    historyWrite('Pemasukan',asalDana,jumlah)
+    historyWrite('Simpanan','Tambah Simpanan',jumlah)
 
     print("[Simpanan Ditambahkan]")
     time.sleep(1)
@@ -157,7 +158,7 @@ def ambilSimpanan(simpanan):
         with open(path+'\deposit.json', 'w') as outfile:
             json.dump(dataDeposit,outfile,indent=4)
 
-        historyWrite('Pengeluaran','Ambil Simpanan',jumlah)
+        historyWrite('Simpanan','Ambil Simpanan',jumlah)
 
         print("[Simpanan Diambil]")
         time.sleep(1)

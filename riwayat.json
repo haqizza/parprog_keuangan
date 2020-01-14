@@ -53,6 +53,18 @@
             "tujuan": "biaya pengobatan",
             "jumlah": 450000,
             "tanggal": "14-01-2020"
+        },
+        {
+            "jenis": "Pemasukan",
+            "asalDana": "Saldo",
+            "jumlah": 1000,
+            "tanggal": "14-01-2020"
+        },
+        {
+            "jenis": "Pemasukan",
+            "asalDana": "Gaji",
+            "jumlah": 9000,
+            "tanggal": "14-01-2020"
         }
     ]
 }
