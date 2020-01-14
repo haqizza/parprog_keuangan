@@ -4,13 +4,13 @@
             "jenis": "Pengeluaran",
             "tujuan": "Makan",
             "jumlah": 20000,
-            "tanggal": "11-01-2020"
+            "tanggal": "11-11-2019"
         },
         {
             "jenis": "Pengeluaran",
             "tujuan": "Transport",
             "jumlah": 10000,
-            "tanggal": "11-01-2020"
+            "tanggal": "11-12-2019"
         },
         {
             "jenis": "Pemasukan",
@@ -31,11 +31,6 @@
             "tanggal": "11-01-2020"
         },
         {
-<<<<<<< HEAD
-            "jenis": "Pemasukan",
-            "asalDana": "gaji",
-            "jumlah": 14000000,
-=======
             "jenis": "Pengeluaran",
             "tujuan": "obat-obatan",
             "jumlah": 100000,
@@ -57,7 +52,6 @@
             "jenis": "Pengeluaran",
             "tujuan": "biaya pengobatan",
             "jumlah": 450000,
->>>>>>> 526ad30386932394c74fc4b1b3c902822afcaf94
             "tanggal": "14-01-2020"
         }
     ]

@@ -1,23 +1,9 @@
 {
-    "pengeluaran": [
+    "pemasukan": [
         {
-<<<<<<< HEAD
-            "tujuan": "Makan",
-            "jumlah": 20000,
-            "tanggal": "11-01-2020"
-        },
-        {
-            "tujuan": "Transport",
-            "jumlah": 10000,
-            "tanggal": "11-01-2020"
-        },
-        {
-            "asalDana": 14000000,
-            "tanggal": "14-01-2020"
-=======
             "asalDana": "Gaji",
             "jumlah": 40000,
-            "tanggal": "11-01-2020"
+            "tanggal": "11-12-2019"
         },
         {
             "asalDana": "Hibah",
@@ -28,7 +14,6 @@
             "asalDana": "Gaji",
             "jumlah": 100000,
             "tanggal": "11-01-2020"
->>>>>>> 526ad30386932394c74fc4b1b3c902822afcaf94
         }
     ]
 }

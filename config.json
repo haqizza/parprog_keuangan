@@ -2,9 +2,5 @@
     "set": true,
     "anggaran_reset": true,
     "anggaran_tanggal": 14,
-<<<<<<< HEAD
-    "anggaran_jumlah": 70000
-=======
     "anggaran_jumlah": 10000
->>>>>>> 526ad30386932394c74fc4b1b3c902822afcaf94
 }

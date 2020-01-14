@@ -5,9 +5,10 @@ import re
 from datetime import datetime
 
 # Set dates
-now = datetime.today().strftime('%d-%m-%Y') # Assign (tanggal-bulan-tahun) hari ini ke now
-date = datetime.today().strftime('%d') # Assign tanggal ke date
-month = datetime.today().strftime('%m') # Assign nama bulan ke month
+now = datetime.today().strftime('%d-%m-%Y') # Assign (tanggal-bulan-tahun) hari ini
+date = datetime.today().strftime('%d') # Assign tanggal
+month = datetime.today().strftime('%m') # Assign bulan
+monYe = datetime.today().strftime('%m-%Y') # Assign bulan tahun
 # Set Path
 path = os.getcwd()
 
@@ -28,10 +29,6 @@ with open(path+'\pengeluaran.json') as pengeluaran_file:
 def clear():
     __ = os.system('cls')
 
-def countMonth():
-    for words in [month]:
-    if re.search(r'\b' + words + r'\b', s):
-        print('{0} found'.format(words))
 
 #Fungsi untuk pengaturan pertama kali
 def setting():
@@ -78,13 +75,6 @@ def aturAnggaran(anggaran):
     print("!! Anggaran Akan Dihitung Mulai Hari Ini !!")
     print("Anggaran Bulanan Anda: {}".format(anggaran))
     jumlah = int(input("Jumlah: RP."))
-    pilih = int(input("kembali(0): "))
-    if(pilih == 0):
-        pengaturan()
-    else:
-        print("[Menu Tidak Tersedia]")
-        time.sleep(1)
-        pengaturan()
     
     dataDeposit['anggaran'] = jumlah
     with open(path+'\deposit.json', 'w') as outfile:
@@ -107,14 +97,9 @@ def tambahSaldo(saldo):
     with open(path+'\deposit.json', 'w') as outfile:
         json.dump(dataDeposit,outfile,indent=4)
     
-<<<<<<< HEAD
-    dataPengeluaran["pengeluaran"].append({ # Tambah data
-            'asalDana': jumlah,
-=======
     dataPemasukan["pemasukan"].append({ # Tambah data
             'asalDana': asalDana,
             'jumlah': jumlah,
->>>>>>> 526ad30386932394c74fc4b1b3c902822afcaf94
             'tanggal': now
         })
     with open(path+'\pemasukan.json','w') as outfile:
@@ -203,46 +188,58 @@ def simpanans():
 def riwayat():
     clear()
     print("=======[ Riwayat ]=======")
-
-    fh = open('D:\\riwayat.txt', 'w')
+    doc = os.path.expanduser('~\Documents')
+    fh = open(doc+'\\riwayat.txt', 'w')
     dataR = dataRiwayat["riwayat"]
     x = 1
     for data in dataR:
-        fh.write("{}. [{}]\n".format(x,data["tanggal"]))
-        fh.write("Jenis       : {}\n".format(data["jenis"]))
+        tgl = data["tanggal"]
+        cek = tgl.endswith(monYe)
+        if(cek==True):
+            fh.write("{}. [{}]\n".format(x,data["tanggal"]))
+            fh.write("Jenis       : {}\n".format(data["jenis"]))
 
-        if(data["jenis"]=="Pemasukan"):
-            fh.write("Asal Dana   : {}\n".format(data["asalDana"]))
-        else:
-            fh.write("Tujuan      : {}\n".format(data["tujuan"]))
+            if(data["jenis"]=="Pemasukan"):
+                fh.write("Asal Dana   : {}\n".format(data["asalDana"]))
+            else:
+                fh.write("Tujuan      : {}\n".format(data["tujuan"]))
 
-        fh.write("Jumlah      : Rp.{}\n".format(data["jumlah"]))
-        x = x + 1
+            fh.write("Jumlah      : Rp.{}\n".format(data["jumlah"]))
+            x = x + 1
+
     fh.close()
 
-    print("[Data Riwayat Telah Diekstrak ke D:\\riwayat.txt]")
-    time.sleep(2)
+    print("[Data Riwayat Telah Diekstrak ke {}\\riwayat.txt".format(doc))
+    time.sleep(10)
     pengaturan()
 
 def laporan():
-    lenPemasukan = len(dataPemasukan["pemasukan"])
-    lenPengeluaran = len(dataPengeluaran["pengeluaran"])
+    lenPem = 0 
+    lenPeng =  0
     dataPem = dataPemasukan["pemasukan"]
     dataPeng = dataPengeluaran["pengeluaran"]
     jumlahPem =0
     jumlahPeng =0
 
-    for data in dataPemasukan:
-        jumlahPem = jumlahPem + dataPemasukan["pemasukan"][0]["jumlah"]
+    for data in dataPem:
+        tgl = data["tanggal"]
+        cek = tgl.endswith(monYe)
+        if(cek==True):
+            jumlahPem = jumlahPem + data["jumlah"]
+            lenPem = lenPem + 1
     
-    for data in dataPengeluaran:
-        jumlahPeng = jumlahPeng + dataPengeluaran["pengeluaran"][0]["jumlah"]
+    for data in dataPeng:
+        tgl = data["tanggal"]
+        cek = tgl.endswith(monYe)
+        if(cek==True):
+            jumlahPeng = jumlahPeng + data["jumlah"]
+            lenPeng = lenPeng + 1
 
     print("=======[ Laporan ]=======")
     print("[ Data Anda Bulan Ini ]".format(month))
-    print("Pemasukan Anda           : {} Transaksi".format(lenPemasukan))
+    print("Pemasukan Anda           : {} Transaksi".format(lenPem))
     print("Pemasukan Anda Sebesar   : Rp.{}".format(jumlahPem))
-    print("Pengeluaran Anda         : {} Transaksi".format(lenPengeluaran))
+    print("Pengeluaran Anda         : {} Transaksi".format(lenPeng))
     print("Pengeluaran Anda Sebesar : Rp.{}".format(jumlahPeng))
     pilih = input("Kembali(0): ")
 
@@ -316,7 +313,7 @@ def main():
     saldo = dataDeposit["saldo"]
     anggaran = dataDeposit["anggaran"]
     simpanan = dataDeposit["simpanan"]
-
+    
     print("===================[ MENU ]===================")
     print("|1. Transaksi||2. Tambah Saldo||3. Pengaturan|")
     print("|4. Keluar   |                               |")
