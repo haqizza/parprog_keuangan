@@ -1,5 +1,11 @@
 {
+<<<<<<< HEAD
+    "saldo": 14400000,
+    "anggaran": 200000,
+    "simpanan": 10000
+=======
     "saldo": 70000,
     "anggaran": 10000,
     "simpanan": 30000
+>>>>>>> 526ad30386932394c74fc4b1b3c902822afcaf94
 }
