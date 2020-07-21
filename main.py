@@ -62,6 +62,10 @@ def historyWrite(jenis,asalTujuan,jumlah): # Untuk Menulis Riwayat
         AorT='tujuan'
     elif(jenis=='Simpanan'):
         AorT='tujuan'
+    elif(jenis=='Hutang'):
+        AorT='dari'
+    elif(jenis=='Piutang'):
+        AorT='untuk'
 
     dataRiwayat["riwayat"].append({
         'jenis': jenis,
@@ -287,21 +291,88 @@ def transaksi(saldo,anggaran):
 
 def hutangPiutang():
     clear()
+    saldo = dataDeposit["saldo"]
 
     print("=============[ MENU ]=============")
     print("|1. Hutang||2. Piutang||3.Kembali|")
     print("==================================")
     pilih=int(input("Menu: "))
     if(pilih==1):
-        hutang()
+        hutang(saldo)
     elif(pilih==2):
-        piutang()
+        piutang(saldo)
     elif(pilih==3):
         main()
     else:
         print("[Menu tidak tersedia]")
         time.sleep(1)
         hutangPiutang()
+
+def hutang(saldo):
+    clear()
+    print("=========[Hutang]==========")
+    print("Saldo anda sekarang: {}".format(saldo))
+    jumlah = int(input("Jumlah Pinjaman:"))
+    asal = input("Meminjam dari: ")
+    saldo += jumlah
+
+    dataDeposit['saldo'] = saldo
+    with open(path+'\deposit.json', 'w') as outfile:
+        json.dump(dataDeposit,outfile,indent=4)
+    
+    dataPerhutangan["perhutangan"].append({ # Tambah data
+            'asalHutang': asal,
+            'jumlah': jumlah,
+            'tanggal': now
+        })
+    with open(path+'\perhutangan.json','w') as outfile:
+        json.dump(dataPerhutangan,outfile,indent=4)
+    
+    dataPemasukan["pemasukan"].append({ # Tambah data
+            'asalDana': 'Hutang dari ' + asal,
+            'jumlah': jumlah,
+            'tanggal': now
+        })
+    with open(path+'\pemasukan.json','w') as outfile:
+        json.dump(dataPemasukan,outfile,indent=4)
+
+    historyWrite('Hutang', asal, jumlah)
+    print("[Dana pinjaman telah ditambahkan!]")
+    time.sleep(2)
+    hutangPiutang()
+
+def piutang(saldo):
+    clear()
+    print("=========[Piutang]==========")
+    print("Saldo anda sekarang: {}".format(saldo))
+    jumlah = int(input("Jumlah Pinjaman:"))
+    untuk = input("Meminjamkan untuk: ")
+    saldo -= jumlah
+
+    dataDeposit['saldo'] = saldo
+    with open(path+'\deposit.json', 'w') as outfile:
+        json.dump(dataDeposit,outfile,indent=4)
+    
+    dataPerhutangan["perhutangan"].append({ # Tambah data
+            'Menghutangi': untuk,
+            'jumlah': jumlah,
+            'tanggal': now
+        })
+    with open(path+'\perhutangan.json','w') as outfile:
+        json.dump(dataPerhutangan,outfile,indent=4)
+    
+    dataPengeluaran["pengeluaran"].append({ # Tambah data
+            'hutangUntuk': untuk,
+            'jumlah': jumlah,
+            'tanggal': now
+        })
+    with open(path+'\pengeluaran.json','w') as outfile:
+        json.dump(dataPengeluaran,outfile,indent=4)
+
+    historyWrite('Piutang', untuk, jumlah)
+    print("[Anda telah memberi piutang!]")
+    time.sleep(2)
+    hutangPiutang()
 
 def pengaturan():
     clear()
@@ -338,7 +409,7 @@ def main():
     
     print("===================[ MENU ]===================")
     print("|1. Transaksi||2. Tambah Saldo||3. Pengaturan|")
-    print("|4. Keluar   |                               |")
+    print("|4. Hutang Piutang            ||5. Keluar    |")
     print("==============================================")
     print("Saldo Anda: {}".format(saldo))
     print("Anggaran Bulan Ini: {}".format(anggaran))
@@ -352,6 +423,8 @@ def main():
     elif(pilih == 3):
         pengaturan()
     elif(pilih == 4):
+        hutangPiutang()
+    elif(pilih==5):
         exit()
     else:
         print("[Menu Tidak Tersedia]")
