@@ -22,6 +22,8 @@ with open(path+'\pemasukan.json') as pemasukan_file:
    dataPemasukan = json.load(pemasukan_file)
 with open(path+'\pengeluaran.json') as pengeluaran_file:
    dataPengeluaran = json.load(pengeluaran_file)
+with open(path+'\perhutangan.json') as perhutangan_file:
+    dataPerhutangan = json.load(perhutangan_file)
 
 
 #Fungsi untuk membersihkan jendela
@@ -282,6 +284,24 @@ def transaksi(saldo,anggaran):
         print("[Transaksi Ditambahkan]")
     time.sleep(1)
     main()
+
+def hutangPiutang():
+    clear()
+
+    print("=============[ MENU ]=============")
+    print("|1. Hutang||2. Piutang||3.Kembali|")
+    print("==================================")
+    pilih=int(input("Menu: "))
+    if(pilih==1):
+        hutang()
+    elif(pilih==2):
+        piutang()
+    elif(pilih==3):
+        main()
+    else:
+        print("[Menu tidak tersedia]")
+        time.sleep(1)
+        hutangPiutang()
 
 def pengaturan():
     clear()
