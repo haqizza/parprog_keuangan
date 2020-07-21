@@ -24,6 +24,8 @@ with open(path+'\pengeluaran.json') as pengeluaran_file:
    dataPengeluaran = json.load(pengeluaran_file)
 with open(path+'\perhutangan.json') as perhutangan_file:
     dataPerhutangan = json.load(perhutangan_file)
+with open(path+'\\totalperhutangan.json') as totalperhutangan_file:
+    dataTotalPerhutangan = json.load(totalperhutangan_file)   
 
 
 #Fungsi untuk membersihkan jendela
@@ -292,15 +294,17 @@ def transaksi(saldo,anggaran):
 def hutangPiutang():
     clear()
     saldo = dataDeposit["saldo"]
+    hutang = dataTotalPerhutangan["hutang"]
+    piutang = dataTotalPerhutangan["piutang"]
 
     print("=============[ MENU ]=============")
     print("|1. Hutang||2. Piutang||3.Kembali|")
     print("==================================")
     pilih=int(input("Menu: "))
     if(pilih==1):
-        hutang(saldo)
+        hutangs(saldo, hutang)
     elif(pilih==2):
-        piutang(saldo)
+        piutangs(saldo, piutang)
     elif(pilih==3):
         main()
     else:
@@ -308,17 +312,22 @@ def hutangPiutang():
         time.sleep(1)
         hutangPiutang()
 
-def hutang(saldo):
+def hutangs(saldo, hutang):
     clear()
     print("=========[Hutang]==========")
     print("Saldo anda sekarang: {}".format(saldo))
     jumlah = int(input("Jumlah Pinjaman:"))
     asal = input("Meminjam dari: ")
     saldo += jumlah
+    hutang += jumlah
 
     dataDeposit['saldo'] = saldo
     with open(path+'\deposit.json', 'w') as outfile:
         json.dump(dataDeposit,outfile,indent=4)
+
+    dataTotalPerhutangan['hutang'] = hutang
+    with open(path+'\\totalperhutangan.json', 'w') as outfile:
+        json.dump(dataTotalPerhutangan, outfile, indent=4)
     
     dataPerhutangan["perhutangan"].append({ # Tambah data
             'asalHutang': asal,
@@ -341,17 +350,22 @@ def hutang(saldo):
     time.sleep(2)
     hutangPiutang()
 
-def piutang(saldo):
+def piutangs(saldo, piutang):
     clear()
     print("=========[Piutang]==========")
     print("Saldo anda sekarang: {}".format(saldo))
     jumlah = int(input("Jumlah Pinjaman:"))
     untuk = input("Meminjamkan untuk: ")
     saldo -= jumlah
+    piutang += jumlah
 
     dataDeposit['saldo'] = saldo
     with open(path+'\deposit.json', 'w') as outfile:
         json.dump(dataDeposit,outfile,indent=4)
+
+    dataTotalPerhutangan['piutang'] = piutang
+    with open(path+'\\totalperhutangan.json', 'w') as outfile:
+        json.dump(dataTotalPerhutangan, outfile, indent=4)
     
     dataPerhutangan["perhutangan"].append({ # Tambah data
             'Menghutangi': untuk,
@@ -362,7 +376,7 @@ def piutang(saldo):
         json.dump(dataPerhutangan,outfile,indent=4)
     
     dataPengeluaran["pengeluaran"].append({ # Tambah data
-            'hutangUntuk': untuk,
+            'tujuan': 'Memberi hutang untuk ' + untuk,
             'jumlah': jumlah,
             'tanggal': now
         })
@@ -406,6 +420,8 @@ def main():
     saldo = dataDeposit["saldo"]
     anggaran = dataDeposit["anggaran"]
     simpanan = dataDeposit["simpanan"]
+    hutang = dataTotalPerhutangan["hutang"]
+    piutang = dataTotalPerhutangan["piutang"]
     
     print("===================[ MENU ]===================")
     print("|1. Transaksi||2. Tambah Saldo||3. Pengaturan|")
@@ -414,6 +430,8 @@ def main():
     print("Saldo Anda: {}".format(saldo))
     print("Anggaran Bulan Ini: {}".format(anggaran))
     print("Simpanan Anda: {}".format(simpanan))
+    print("Hutang yang harus dilunasi: {}".format(hutang))
+    print("Piutang: {}".format(piutang))
     pilih = int(input("Menu: "))
 
     if(pilih == 1):
